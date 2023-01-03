@@ -6,10 +6,10 @@ RUN apt update
 RUN apt install bind9
 RUN cp /etc/bind/named.conf.options /etc/bind/named.conf.options.bk
 
-COPY named.conf.internal-zones /etc/bind/
-COPY named.conf.options /etc/bind/
-COPY example.fuji.lan /etc/bind/
-COPY 29.172.db /etc/bind/
+COPY config/named.conf.internal-zones /etc/bind/
+COPY config/named.conf.options /etc/bind/
+COPY config/example.fuji.lan /etc/bind/
+COPY config/29.172.db /etc/bind/
 
 RUN named-checkconf -z
 
