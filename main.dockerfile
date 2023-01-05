@@ -2,8 +2,9 @@ FROM ubuntu:22.10
 
 # RUN はイメージをビルドするときに実行される
 # ミドルウェアのインストールやファイル読み込みはこの段階で済ます？
+# インストール時には必ずyオプションをつける（プロンプト入力でabortになるため）
 RUN apt update
-RUN apt install bind9
+RUN apt install -y bind9
 RUN cp /etc/bind/named.conf.options /etc/bind/named.conf.options.bk
 
 COPY config/named.conf.internal-zones /etc/bind/
@@ -20,4 +21,4 @@ EXPOSE 53/udp
 # 基本的にDockerコンテナ内ではsystemctlは呼び出せないらしい
 # アプリケーションプログラムを直接実行する
 # 下記コマンドはsystemctl等のサービス起動コマンドを使ったときに確認できる
-CMD ["/usr/sbin/named","-c","/etc/bind/named.conf","-g","-u","named"]
+CMD ["/usr/sbin/named","-c","/etc/bind/named.conf","-g","-u","bind"]
