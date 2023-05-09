@@ -12,6 +12,9 @@ COPY config/named.conf.options /etc/bind/
 COPY config/example.fuji.lan /etc/bind/
 COPY config/29.172.db /etc/bind/
 
+# named.confに独自ドメインのゾーン情報を読み込ませる
+RUN echo 'include "/etc/bind/named.conf.internal-zones";' >> /etc/bind/named.conf
+
 RUN named-checkconf -z
 
 # DNSポートをあける
