@@ -1,0 +1,4 @@
+main.example.fuji A
+www.example.fuji A
+main.example.fuji NS
+main.example.fuji SOA
