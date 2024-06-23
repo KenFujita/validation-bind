@@ -1,4 +1,5 @@
-FROM ubuntu:22.10
+# update version
+FROM ubuntu:23.10
 
 # RUN はイメージをビルドするときに実行される
 # ミドルウェアのインストールやファイル読み込みはこの段階で済ます？
@@ -16,6 +17,9 @@ COPY config/29.172.db /etc/bind/
 RUN echo 'include "/etc/bind/named.conf.internal-zones";' >> /etc/bind/named.conf
 
 RUN named-checkconf -z
+# ゾーンファイルのチェックは下記で行う
+RUN named-checkzone example.fuji /etc/bind/example.fuji.lan
+RUN named-checkzone 29.172.in-addr.arpa /etc/bind/29.172.db
 
 # DNSポートをあける
 EXPOSE 53/tcp
